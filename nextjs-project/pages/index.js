@@ -1,2 +1,5 @@
-export default () => <span>Index</span>
+// import '../test.css'
+import { Button } from 'antd'
+
+export default () => <Button>Index</Button>
 
