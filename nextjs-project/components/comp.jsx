@@ -1,0 +1,1 @@
+export default ({ children }) => <button>{children} Lazy Component</button>

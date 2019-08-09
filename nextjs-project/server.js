@@ -12,15 +12,26 @@ app.prepare().then(() => {
   const server = new Koa()
   const router = new Router()
 
+  router.get('/a/:id', async (ctx) => {
+    const id = ctx.params.id
+    await handle(ctx.req, ctx.res, {
+      pathname: '/a',
+      query: { id }
+    })
+    ctx.respond = false
+  })
+
+  server.use(router.routes())
+
   // router.get('/test/:id', (ctx) => {
   //   // ctx.body = `<p>request /test ${ctx.params.id}</p>`
   //   ctx.body = { success: true }
   //   ctx.set('Content-Type', 'application/json')
   // })
 
-  server.use(async (ctx, next) => {
-    await next()
-  })
+  // server.use(async (ctx, next) => {
+  //   await next()
+  // })
 
   // server.use(async (ctx, next) => {
   //   ctx.body = '<span>Koa Render3</span>'
@@ -31,7 +42,7 @@ app.prepare().then(() => {
     ctx.respond = false
   })
 
-  // server.use(router.routes())
+  
 
   server.listen(PORT, () => {
     console.log(`koa server is listening at port ${PORT}`)

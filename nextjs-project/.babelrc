@@ -4,9 +4,9 @@
     [
       "import", 
       { 
-        "libraryName": "antd",
-        "style": "css"
+        "libraryName": "antd"
       }
-    ]
+    ],
+    ["styled-components", {"ssr": true}]
   ]
 }
