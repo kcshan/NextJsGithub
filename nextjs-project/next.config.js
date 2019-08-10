@@ -52,4 +52,16 @@ const config = {
 }
 
 // withLess(withCss())
-module.exports = withCss({})
+module.exports = withCss({
+  env: {
+    customKey: 'value'
+  },
+  serverRuntimeConfig: {
+    mySecret: 'secret',
+    secondSecret: process.env.SECOND_SECRET
+  },
+  // 在服务端渲染和客户端渲染都可获取的配置
+  publicRuntimeConfig: {
+    staticFolder: '/static'
+  }
+})

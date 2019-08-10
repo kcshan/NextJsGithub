@@ -1,4 +1,5 @@
 import { withRouter } from 'next/router'
+import getConfig from 'next/config'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -9,6 +10,8 @@ import styled from 'styled-components'
 
 const Comp = dynamic(import('../components/comp'))
 
+const { serverRuntimeConfig, publicRuntimeConfig } = getConfig()
+
 const COLOR = '#113366'
 
 const Title = styled.h1`
@@ -16,25 +19,29 @@ const Title = styled.h1`
   font-size: 20px;
 `
 
-const A = ({ router, name, time }) => (
-  <>
-    <Title>This is Title {time}</Title>
-    <Comp />
-    <Link href="#aaa">
-      <a className="link">
-        A--{router.query.id}--{name}
-      </a>
-    </Link>
-    <style jsx>{`
-      a {
-        color: red;
-      }
-      .link {
-        color: ${COLOR};
-      }
-    `}</style>
-  </>
-)
+const A = ({ router, name, time }) => {
+  console.log(serverRuntimeConfig, publicRuntimeConfig)
+
+  return (
+    <>
+      <Title>This is Title {time}</Title>
+      <Comp />
+      <Link href="#aaa">
+        <a className="link">
+          A--{router.query.id}--{name}--{process.env.customKey}
+        </a>
+      </Link>
+      <style jsx>{`
+        a {
+          color: red;
+        }
+        .link {
+          color: ${COLOR};
+        }
+      `}</style>
+    </>
+  )
+}
 
 A.getInitialProps = async ctx => {
 
