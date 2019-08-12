@@ -1,8 +1,9 @@
 import App, { Container } from 'next/app'
+import { Provider } from 'react-redux'
 
 import Layout from '../components/Layout'
-
 import MyContext from '../lib/my-context'
+import withRedux from '../lib/with-redux'
 
 import 'antd/dist/antd.css'
 
@@ -23,19 +24,20 @@ class MyApp extends App {
   }
 
   render () {
-    const { Component, pageProps } = this.props
+    const { Component, pageProps, reduxStore } = this.props
     
     return (
       <Container>
         <Layout> 
-          <MyContext.Provider value={this.state.context}>
-            <Component {...pageProps} />
-            <button onClick={() => this.setState({ context: `${this.state.context}111`})}>update context</button>
-          </MyContext.Provider>
+          <Provider store={reduxStore}>
+            <MyContext.Provider value={this.state.context}>
+              <Component {...pageProps} />
+            </MyContext.Provider>
+          </Provider>
         </Layout>
       </Container>
     )
   }
 }
 
-export default MyApp
+export default withRedux(MyApp)

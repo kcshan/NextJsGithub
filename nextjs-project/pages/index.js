@@ -1,5 +1,8 @@
 // import '../test.css'
 import Router from 'next/router'
+import { connect } from 'react-redux'
+import store from '../store/store'
+
 
 const events = [
   'routeChangeStart',
@@ -12,7 +15,7 @@ const events = [
 
 const makeEvent = (type) => {
   return (...args) => {
-    console.log(type, ...args)
+    // console.log(type, ...args)
   }
 }
 
@@ -20,14 +23,32 @@ events.forEach(event => {
   Router.events.on(event, makeEvent(event))
 })
 
-export default () => {
+const Index = ({ counter, username, add, rename }) => {
 
   return (
     <>
-      <span>Index</span>
-      <a>Index a</a>
+      <span>Count: {counter}</span>
+      <br/>
+      <span>UserName: {username}</span>
+      <br/>
+      <input value={username} onChange={e => rename(e.target.value)}/>
+      <button onClick={() => add(counter)}>do add</button>
     </>
   )
   
 }
 
+export default connect(
+  function mapStateToProps(state) {
+    return {
+      counter: state.counter.count,
+      username: state.user.username
+    }
+  },
+  function mapDispatchToProps(dispatch) {
+    return {
+      add: (num) => dispatch({ type: 'ADD', num }),
+      rename: (name) => dispatch({ type: 'UPDATE_USERNAME', name })
+    }
+  }
+)(Index)

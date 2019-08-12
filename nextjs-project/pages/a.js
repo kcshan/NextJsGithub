@@ -20,7 +20,7 @@ const Title = styled.h1`
 `
 
 const A = ({ router, name, time }) => {
-  console.log(serverRuntimeConfig, publicRuntimeConfig)
+  // console.log(serverRuntimeConfig, publicRuntimeConfig)
 
   return (
     <>
