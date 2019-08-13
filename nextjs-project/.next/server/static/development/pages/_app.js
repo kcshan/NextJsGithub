@@ -208,13 +208,14 @@ const getOrcreateStore = initialState => {
 
   WithReduxApp.getInitialProps = async ctx => {
     // Comp.getInitialProps
+    const reduxStore = getOrcreateStore();
+    ctx.reduxStore = reduxStore;
     let appProps = {};
 
     if (typeof Comp.getInitialProps === 'function') {
       appProps = await Comp.getInitialProps(ctx);
     }
 
-    const reduxStore = getOrcreateStore();
     return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, appProps, {
       initialReduxState: reduxStore.getState()
     });
@@ -1359,11 +1360,11 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_2___default.a {
     });
   }
 
-  static async getInitialProps({
-    Component,
-    ctx
-  }) {
-    let pageProps;
+  static async getInitialProps(ctx) {
+    const {
+      Component
+    } = ctx;
+    let pageProps = {};
 
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
@@ -1397,11 +1398,12 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_2___default.a {
 /*!************************!*\
   !*** ./store/store.js ***!
   \************************/
-/*! exports provided: default */
+/*! exports provided: add, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "add", function() { return add; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return initiallizeStore; });
 /* harmony import */ var _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/assign */ "./node_modules/@babel/runtime-corejs2/core-js/object/assign.js");
 /* harmony import */ var _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_0__);
@@ -1421,7 +1423,7 @@ const initialState = {
   count: 0
 };
 const userInitialState = {
-  username: 'jokcy'
+  username: 'thomas'
 };
 const ADD = 'ADD';
 

@@ -146,32 +146,33 @@ var getOrcreateStore = function getOrcreateStore(initialState) {
     var _ref = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
     /*#__PURE__*/
     _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(ctx) {
-      var appProps, reduxStore;
+      var reduxStore, appProps;
       return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               // Comp.getInitialProps
+              reduxStore = getOrcreateStore();
+              ctx.reduxStore = reduxStore;
               appProps = {};
 
               if (!(typeof Comp.getInitialProps === 'function')) {
-                _context.next = 5;
+                _context.next = 7;
                 break;
               }
 
-              _context.next = 4;
+              _context.next = 6;
               return Comp.getInitialProps(ctx);
 
-            case 4:
+            case 6:
               appProps = _context.sent;
 
-            case 5:
-              reduxStore = getOrcreateStore();
+            case 7:
               return _context.abrupt("return", Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, appProps, {
                 initialReduxState: reduxStore.getState()
               }));
 
-            case 7:
+            case 8:
             case "end":
               return _context.stop();
           }
@@ -38758,31 +38759,32 @@ function (_App) {
     value: function () {
       var _getInitialProps = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
       /*#__PURE__*/
-      _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref) {
-        var Component, ctx, pageProps;
+      _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(ctx) {
+        var Component, pageProps;
         return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                Component = _ref.Component, ctx = _ref.ctx;
+                Component = ctx.Component;
+                pageProps = {};
 
                 if (!Component.getInitialProps) {
-                  _context.next = 5;
+                  _context.next = 6;
                   break;
                 }
 
-                _context.next = 4;
+                _context.next = 5;
                 return Component.getInitialProps(ctx);
 
-              case 4:
+              case 5:
                 pageProps = _context.sent;
 
-              case 5:
+              case 6:
                 return _context.abrupt("return", {
                   pageProps: pageProps
                 });
 
-              case 6:
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -38809,11 +38811,12 @@ function (_App) {
 /*!************************!*\
   !*** ./store/store.js ***!
   \************************/
-/*! exports provided: default */
+/*! exports provided: add, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "add", function() { return add; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return initiallizeStore; });
 /* harmony import */ var _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/assign */ "./node_modules/@babel/runtime-corejs2/core-js/object/assign.js");
 /* harmony import */ var _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_0__);
@@ -38831,7 +38834,7 @@ var initialState = {
   count: 0
 };
 var userInitialState = {
-  username: 'jokcy'
+  username: 'thomas'
 };
 var ADD = 'ADD';
 

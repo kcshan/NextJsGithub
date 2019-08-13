@@ -7,7 +7,7 @@ const initialState = {
 }
 
 const userInitialState = {
-  username: 'jokcy'
+  username: 'thomas'
 }
 
 const ADD = 'ADD'
@@ -47,7 +47,7 @@ const store = createStore(allReducers,
 )
 
 // action creator
-const add = (num) => {
+export const add = (num) => {
   return {
     type: ADD,
     num
