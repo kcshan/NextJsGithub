@@ -120,9 +120,8 @@ var getOrcreateStore = function getOrcreateStore(initialState) {
         var _this$props = this.props,
             Component = _this$props.Component,
             pageProps = _this$props.pageProps,
-            rest = Object(_babel_runtime_corejs2_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_4__["default"])(_this$props, ["Component", "pageProps"]);
+            rest = Object(_babel_runtime_corejs2_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_4__["default"])(_this$props, ["Component", "pageProps"]); // console.log(Component, pageProps)
 
-        console.log(Component, pageProps);
 
         if (pageProps) {
           pageProps.test = '123';
@@ -38892,13 +38891,11 @@ var addAsync = function addAsync(num) {
       store.dispatch(add(num));
     }, 1000);
   };
-}; // console.log(store.getState())
-
+};
 
 store.dispatch(add(3)); // console.log(store.getState())
 
-store.subscribe(function () {
-  console.log('changed', store.getState());
+store.subscribe(function () {// console.log('changed', store.getState())
 }); // store.dispatch({ type: ADD })
 
 store.dispatch(addAsync(5));

@@ -62,12 +62,11 @@ const addAsync = (num) => {
   }
 }
 
-// console.log(store.getState())
 store.dispatch(add(3))
 // console.log(store.getState())
 
 store.subscribe(() => {
-  console.log('changed', store.getState())
+  // console.log('changed', store.getState())
 })
 
 // store.dispatch({ type: ADD })

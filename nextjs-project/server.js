@@ -1,10 +1,18 @@
 const Koa = require('koa')
 const Router = require('koa-router')
 const next = require('next')
+const session = require('koa-session')
+const Redis = require('ioredis')
+
+const auth = require('./server/auth')
+const RedisSessionStore = require('./server/session-store')
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
+
+// 创建redis client
+const redis = new Redis()
 
 const PORT = 3001
 
@@ -12,7 +20,19 @@ app.prepare().then(() => {
   const server = new Koa()
   const router = new Router()
 
-  router.get('/a/:id', async (ctx) => {
+  server.keys = ['Thomas develop github app']
+  const SESSION_CONFIG = {
+    key: 'jid',
+    // maxAge: 10 * 1000,
+    store: new RedisSessionStore(redis)
+  }
+
+  server.use(session(SESSION_CONFIG, server))
+
+  // // 配置处理github oauth的登录
+  auth(server)
+
+  router.get('/a/:id', async ctx => {
     const id = ctx.params.id
     await handle(ctx.req, ctx.res, {
       pathname: '/a',
@@ -21,28 +41,41 @@ app.prepare().then(() => {
     ctx.respond = false
   })
 
+  router.get('/api/user/info', async ctx => {
+    const user = ctx.session.userInfo
+    if (!user) {
+      ctx.status = 401
+      ctx.body = 'Need Login'
+    } else {
+      ctx.body = user
+      ctx.set('Content-Type', 'application/json')
+    }
+  })
+
+  // router.get('/set/user', async ctx => {
+  //   ctx.session.user = {
+  //     name: 'thomas',
+  //     age: 19
+  //   }
+  //   ctx.body = 'set session success'
+  // })
+
+  // router.get('/delete/user', async ctx => {
+  //   ctx.session = null
+  //   ctx.body = 'delete session success'
+  // })
+
   server.use(router.routes())
-
-  // router.get('/test/:id', (ctx) => {
-  //   // ctx.body = `<p>request /test ${ctx.params.id}</p>`
-  //   ctx.body = { success: true }
-  //   ctx.set('Content-Type', 'application/json')
-  // })
-
-  // server.use(async (ctx, next) => {
-  //   await next()
-  // })
-
-  // server.use(async (ctx, next) => {
-  //   ctx.body = '<span>Koa Render3</span>'
-  // })
 
   server.use(async (ctx, next) => {
     await handle(ctx.req, ctx.res)
     ctx.respond = false
   })
 
-  
+  server.use(async (ctx, next) => {
+    ctx.res.statusCode = 200
+    await next()
+  })
 
   server.listen(PORT, () => {
     console.log(`koa server is listening at port ${PORT}`)

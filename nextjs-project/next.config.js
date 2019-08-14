@@ -1,11 +1,12 @@
 const withCss = require('@zeit/next-css')
 // withLess
+const config = require('./config')
 
 if (typeof require != 'undefined') {
   require.extensions['.css'] = file => {}
 }
 
-const config = {
+const configs = {
   // 编译文件的输出目录
   distDir: 'dest',
   // 是否给每个路由生成Etag
@@ -51,17 +52,14 @@ const config = {
   }
 }
 
+const GITHUB_OAUTH_URL = 'https://github.com/login/oauth/authorize'
+const SCOPE = 'user'
+
 // withLess(withCss())
 module.exports = withCss({
-  env: {
-    customKey: 'value'
-  },
-  serverRuntimeConfig: {
-    mySecret: 'secret',
-    secondSecret: process.env.SECOND_SECRET
-  },
   // 在服务端渲染和客户端渲染都可获取的配置
   publicRuntimeConfig: {
-    staticFolder: '/static'
+    GITHUB_OAUTH_URL,
+    OAUTH_URL: `${GITHUB_OAUTH_URL}?client_id=${config.github.client_id}&scope=${SCOPE}`
   }
 })
