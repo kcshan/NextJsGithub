@@ -1,15 +1,12 @@
-import axios from "axios"
+
 const api = require('../lib/api')
 
 const Index = () => {
+
   return <span>Index</span>
 }
 
 Index.getInitialProps = async ({ ctx }) => {
-  // const result = await axios
-  // .get('/github/search/repositories?q=react')
-  // .then(resp => console.log(resp))
-
   const result = await api.request(
     {
       url: '/search/repositories?q=react'

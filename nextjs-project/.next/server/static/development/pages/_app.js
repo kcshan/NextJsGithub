@@ -1604,8 +1604,8 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_2___default.a {
   componentDidMount() {
     next_router__WEBPACK_IMPORTED_MODULE_4___default.a.events.on('routeChangeStart', this.startLoading);
     next_router__WEBPACK_IMPORTED_MODULE_4___default.a.events.on('routeChangeComplete', this.stopLoading);
-    next_router__WEBPACK_IMPORTED_MODULE_4___default.a.events.on('routeChangeError', this.stopLoading);
-    axios__WEBPACK_IMPORTED_MODULE_6___default.a.get('/github/search/repositories?q=react').then(resp => console.log(resp.data));
+    next_router__WEBPACK_IMPORTED_MODULE_4___default.a.events.on('routeChangeError', this.stopLoading); // axios.get('/github/search/repositories?q=react')
+    // .then(resp => console.log(resp.data))
   }
 
   componentWillUnmount() {

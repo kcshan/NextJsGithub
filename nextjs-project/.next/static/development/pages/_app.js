@@ -56721,10 +56721,8 @@ function (_App) {
     value: function componentDidMount() {
       next_router__WEBPACK_IMPORTED_MODULE_12___default.a.events.on('routeChangeStart', this.startLoading);
       next_router__WEBPACK_IMPORTED_MODULE_12___default.a.events.on('routeChangeComplete', this.stopLoading);
-      next_router__WEBPACK_IMPORTED_MODULE_12___default.a.events.on('routeChangeError', this.stopLoading);
-      axios__WEBPACK_IMPORTED_MODULE_14___default.a.get('/github/search/repositories?q=react').then(function (resp) {
-        return console.log(resp.data);
-      });
+      next_router__WEBPACK_IMPORTED_MODULE_12___default.a.events.on('routeChangeError', this.stopLoading); // axios.get('/github/search/repositories?q=react')
+      // .then(resp => console.log(resp.data))
     }
   }, {
     key: "componentWillUnmount",
