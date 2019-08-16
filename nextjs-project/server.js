@@ -5,6 +5,7 @@ const session = require('koa-session')
 const Redis = require('ioredis')
 
 const auth = require('./server/auth')
+const api = require('./server/api')
 const RedisSessionStore = require('./server/session-store')
 
 const dev = process.env.NODE_ENV !== 'production'
@@ -31,15 +32,16 @@ app.prepare().then(() => {
 
   // // 配置处理github oauth的登录
   auth(server)
+  api(server)
 
-  router.get('/a/:id', async ctx => {
-    const id = ctx.params.id
-    await handle(ctx.req, ctx.res, {
-      pathname: '/a',
-      query: { id }
-    })
-    ctx.respond = false
-  })
+  // router.get('/a/:id', async ctx => {
+  //   const id = ctx.params.id
+  //   await handle(ctx.req, ctx.res, {
+  //     pathname: '/a',
+  //     query: { id }
+  //   })
+  //   ctx.respond = false
+  // })
 
   router.get('/api/user/info', async ctx => {
     const user = ctx.session.userInfo
@@ -52,22 +54,10 @@ app.prepare().then(() => {
     }
   })
 
-  // router.get('/set/user', async ctx => {
-  //   ctx.session.user = {
-  //     name: 'thomas',
-  //     age: 19
-  //   }
-  //   ctx.body = 'set session success'
-  // })
-
-  // router.get('/delete/user', async ctx => {
-  //   ctx.session = null
-  //   ctx.body = 'delete session success'
-  // })
-
   server.use(router.routes())
 
   server.use(async (ctx, next) => {
+    ctx.req.session = ctx.session
     await handle(ctx.req, ctx.res)
     ctx.respond = false
   })

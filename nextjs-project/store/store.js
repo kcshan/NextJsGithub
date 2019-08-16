@@ -1,85 +1,54 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import ReduxThunk from 'redux-thunk'
+import axios from 'axios'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
-const initialState = {
-  count: 0
-}
+const userInitialState = {}
 
-const userInitialState = {
-  username: 'thomas'
-}
+const LOGOUT = 'LOGOUT'
 
-const ADD = 'ADD'
-const counterReducer = (state = initialState, action) => {
-  switch(action.type) {
-    case ADD:
-      return { count: state.count + (action.num || 1) }
-    default:
-      return state
-  }
-}
-
-const UPDATE_USERNAME = 'UPDATE_USERNAME'
 const userReducer = (state = userInitialState, action) => {
   switch(action.type) {
-    case UPDATE_USERNAME:
-      return {
-        ...state,
-        username: action.name
-      }
+    case LOGOUT:
+      return {}
     default:
       return state
   }
 }
 
 const allReducers = combineReducers({
-  counter: counterReducer,
   user: userReducer
 })
 
-const store = createStore(allReducers, 
-  {
-    counter: initialState,
-    user: userInitialState
-  },
-  composeWithDevTools(applyMiddleware(ReduxThunk))
-)
-
-// action creator
-export const add = (num) => {
-  return {
-    type: ADD,
-    num
+// action creators
+export const logout = () => {
+  return dispatch => {
+    axios.post('/logout')
+    .then(resp => {
+      if (resp.status === 200) {
+        dispatch({
+          type: LOGOUT
+        })
+      } else {
+        console.log('logout failed', resp)
+      }
+    })
+    .catch(err => {
+      console.log('logout failed', err)
+    })
   }
 }
-
-const addAsync = (num) => {
-  return (dispatch) => {
-    setTimeout(() => {
-      store.dispatch(add(num))
-    }, 1000);
-  }
-}
-
-store.dispatch(add(3))
-// console.log(store.getState())
-
-store.subscribe(() => {
-  // console.log('changed', store.getState())
-})
-
-// store.dispatch({ type: ADD })
-store.dispatch(addAsync(5))
-store.dispatch({ type: UPDATE_USERNAME, name: 'thomas' })
 
 export default function initiallizeStore(state) {
   const store = createStore( 
     allReducers,
-    Object.assign({
-      counter: initialState,
-      user: userInitialState
-    }, state),
+    Object.assign(
+      {}, 
+      {
+        user: userInitialState
+      }, 
+      state
+    ),
     composeWithDevTools(applyMiddleware(ReduxThunk))
   )
   return store

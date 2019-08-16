@@ -43,10 +43,24 @@ export default Comp => {
 
   
   WithReduxApp.getInitialProps = async ctx => {
-    // Comp.getInitialProps
     
-    const reduxStore = getOrcreateStore()
+    let reduxStore
 
+    if (isServer) {
+      const { req } = ctx.ctx
+      const session = req.session
+  
+      if (session && session.userInfo) {
+        reduxStore = getOrcreateStore({
+          user: session.userInfo
+        })
+      } else {
+        reduxStore = getOrcreateStore()
+      }
+    } else {
+      reduxStore = getOrcreateStore()
+    }
+    
     ctx.reduxStore = reduxStore
 
     let appProps = {}
