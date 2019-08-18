@@ -46,7 +46,7 @@ class MyApp extends App {
 
 
   static async getInitialProps(ctx) {
-    console.log('app init')
+    // console.log('app init')
     const { Component } = ctx
     let pageProps = {}
     if (Component.getInitialProps) {
@@ -64,12 +64,6 @@ class MyApp extends App {
         <Provider store={reduxStore}>
           { this.state.loading ? <PageLoading /> : null }
           <Layout> 
-            <Link href="/">
-              <a>Index</a>
-            </Link>
-            <Link href="/detail">
-              <a>Detail</a>
-            </Link>
             <Component {...pageProps} />
           </Layout>
         </Provider>

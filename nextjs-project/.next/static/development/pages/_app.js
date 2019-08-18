@@ -56740,11 +56740,7 @@ function (_App) {
           reduxStore = _this$props.reduxStore;
       return react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(next_app__WEBPACK_IMPORTED_MODULE_10__["Container"], null, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_11__["Provider"], {
         store: reduxStore
-      }, this.state.loading ? react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_components_PageLoading__WEBPACK_IMPORTED_MODULE_16__["default"], null) : null, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_components_Layout__WEBPACK_IMPORTED_MODULE_15__["default"], null, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_13___default.a, {
-        href: "/"
-      }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("a", null, "Index")), react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_13___default.a, {
-        href: "/detail"
-      }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("a", null, "Detail")), react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(Component, pageProps))));
+      }, this.state.loading ? react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_components_PageLoading__WEBPACK_IMPORTED_MODULE_16__["default"], null) : null, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_components_Layout__WEBPACK_IMPORTED_MODULE_15__["default"], null, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(Component, pageProps))));
     }
   }], [{
     key: "getInitialProps",
@@ -56757,27 +56753,27 @@ function (_App) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log('app init');
+                // console.log('app init')
                 Component = ctx.Component;
                 pageProps = {};
 
                 if (!Component.getInitialProps) {
-                  _context.next = 7;
+                  _context.next = 6;
                   break;
                 }
 
-                _context.next = 6;
+                _context.next = 5;
                 return Component.getInitialProps(ctx);
 
-              case 6:
+              case 5:
                 pageProps = _context.sent;
 
-              case 7:
+              case 6:
                 return _context.abrupt("return", {
                   pageProps: pageProps
                 });
 
-              case 8:
+              case 7:
               case "end":
                 return _context.stop();
             }

@@ -1615,7 +1615,7 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_2___default.a {
   }
 
   static async getInitialProps(ctx) {
-    console.log('app init');
+    // console.log('app init')
     const {
       Component
     } = ctx;
@@ -1638,11 +1638,7 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_2___default.a {
     } = this.props;
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_app__WEBPACK_IMPORTED_MODULE_2__["Container"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
       store: reduxStore
-    }, this.state.loading ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_PageLoading__WEBPACK_IMPORTED_MODULE_8__["default"], null) : null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Layout__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_5___default.a, {
-      href: "/"
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", null, "Index")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_5___default.a, {
-      href: "/detail"
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", null, "Detail")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Component, pageProps))));
+    }, this.state.loading ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_PageLoading__WEBPACK_IMPORTED_MODULE_8__["default"], null) : null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Layout__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Component, pageProps))));
   }
 
 }
