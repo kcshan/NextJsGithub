@@ -1,7 +1,11 @@
+import { useEffect } from 'react'
 import Link from 'next/link'
 import { withRouter } from 'next/router'
 import Repo from './repo'
 import api from '../lib/api'
+import { get, cache } from '../lib/repo-basic-cache'
+
+const isServer = typeof window === 'undefined'
 
 export default (Comp, type = 'index') => {
 
@@ -17,6 +21,12 @@ export default (Comp, type = 'index') => {
   const WithDetail = ({ router, repoBasic, ...rest }) => {
     const query = makeQuery(router.query)
   
+    useEffect(() => {
+      if (!isServer) {
+        cache(repoBasic)
+      }
+    })
+    
     return (
       <div className="root">
         <div className="repo-basic">
@@ -62,6 +72,21 @@ export default (Comp, type = 'index') => {
 
     const { router, ctx } = context 
     const { owner, name } = ctx.query
+
+    const full_name = `${owner}/${name}`
+  
+    let pageData = {}
+    if (Comp.getInitialProps) {
+      pageData = await Comp.getInitialProps(context)
+    }
+
+    if (get(full_name)) {
+      return {
+        repoBasic: get(full_name),
+        ...pageData
+      }
+    }
+
     const repoBasic = await api.request(
       {
         url: `/repos/${owner}/${name}`,
@@ -69,11 +94,8 @@ export default (Comp, type = 'index') => {
       ctx.req,
       ctx.res
     )
-  
-    let pageData = {}
-    if (Comp.getInitialProps) {
-      pageData = await Comp.getInitialProps(context)
-    }
+
+    
 
     return {
       repoBasic: repoBasic.data,

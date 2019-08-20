@@ -1,10 +1,11 @@
-import { memo, isValidElement } from 'react'
+import { memo, isValidElement, useEffect } from 'react'
 import Router, { withRouter } from 'next/router'
 import { Row, Col, List, Pagination } from 'antd'
 import Link from 'next/link'
 const api = require('../lib/api')
 
 import Repo from '../components/Repo'
+import { cacheArray } from '../lib/repo-basic-cache'
 
 const LANGUAGES = ['JavaScript', 'HTML', 'CSS', 'TypeScript', 'Java', 'Python']
 const SORT_TYPES = [
@@ -48,6 +49,8 @@ const noop = () => {}
 
 const per_page = 20
 
+const isServer = typeof window === 'undefined'
+
 const FilterLink = memo(({name, query, lang, sort, order, page}) => {
   const doSearch = () => {
     Router.push({
@@ -77,7 +80,13 @@ const FilterLink = memo(({name, query, lang, sort, order, page}) => {
 const Search = ({ router, repos }) => {
   const { ...querys } = router.query
   const { lang, sort, order, page } = router.query
-  // console.log(repos)
+  
+  useEffect(() => {
+    if (!isServer) {
+      cacheArray(repos.items)
+    }
+  })
+
   return (
     <div className="root">
       <Row gutter={20}>

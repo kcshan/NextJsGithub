@@ -11,4 +11,4 @@ Detail.getInitialProps = async () => {
   }
 }
 
-export default WithRepoBasic(Detail)
+export default WithRepoBasic(Detail, 'index')

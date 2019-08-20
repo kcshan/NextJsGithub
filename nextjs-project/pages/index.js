@@ -7,6 +7,7 @@ import Router, { withRouter } from 'next/router'
 import LRU from 'lru-cache'
 
 import Repo from '../components/Repo'
+import { cacheArray } from '../lib/repo-basic-cache'
 
 const api = require('../lib/api')
 
@@ -46,6 +47,13 @@ const Index = ({ userRepos, userStarRepos, user, router }) => {
       }
     }
   }, [userRepos, userStarRepos])
+
+  useEffect(() => {
+    if (!isServer) {
+      cacheArray(userRepos)
+      cacheArray(userStarRepos)
+    }
+  })
 
   if (!user || !user.id) {
     return <div className="root">
