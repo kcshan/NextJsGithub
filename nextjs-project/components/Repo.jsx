@@ -53,7 +53,7 @@ export default ({ repo }) => {
         .lang-star{
           display: flex;
         }
-        .lange-star > span{
+        .lang-star > span{
           width: 120px;
           test-align: right;
         }
