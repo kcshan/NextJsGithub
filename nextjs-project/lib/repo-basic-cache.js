@@ -15,6 +15,7 @@ export const cache = repo => {
 }
 
 export const cacheArray = repos => {
-  // debugger
-  repos.forEach(repo => cache(repo))
+  if (repos && Array.isArray(repos)) {
+    repos.forEach(repo => cache(repo))
+  }
 }

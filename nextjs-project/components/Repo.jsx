@@ -1,11 +1,6 @@
 import Link from 'next/link'
-
 import { Icon } from 'antd'
-import moment from 'moment'
-
-const getLastUpdated = (time) => {
-  return moment(time).fromNow()
-}
+import { getLastUpdated } from '../lib/utils'
 
 const getLicense = (license) => {
   return license ? `${license.spdx_id} license` : ''
