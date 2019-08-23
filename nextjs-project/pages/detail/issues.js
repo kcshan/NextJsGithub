@@ -2,10 +2,12 @@ import { useState, useCallback } from 'react'
 import { Avatar, Button } from 'antd'
 import dynamic from 'next/dynamic'
 import WithRepoBasic from '../../components/with-repo-basic'
+import SearchUser from '../../components/SearchUser'
 import api from '../../lib/api'
 import { getLastUpdated } from '../../lib/utils'
 
 const MdRenderer = dynamic(() => import('../../components/MarkdownRenderer'))
+
 
 const IssueDetail = ({ issue }) => {
   return <div className="root" >
@@ -92,8 +94,16 @@ const IssueItem = ({ issue }) => {
 }
 
 const Issues = ({ issues }) => {
+
+  const [creator, setCreator] = useState()
+
+  const handleCreatorChange = useCallback(value => {
+    setCreator(value)
+  }, [])
+
   return (
     <div className="root">
+      <SearchUser onChange={handleCreatorChange} value={creator} />
       <div className="issues">
         {issues.map(issue => <IssueItem issue={issue} key={issue.id} />)}
       </div>
