@@ -1,5 +1,6 @@
 ### 项目链接
-[next + react + koa2 + axios 开发github页面](http://github.shuaiguo.me)
+<a href="http://github.shuaiguo.men" target="_blank">next + react + koa2 + axios 开发github页面</a>
+<br/>
 真实项目是第二个nextjs-project
 ### 项目截图
 #### 首页 + 仓库列表
